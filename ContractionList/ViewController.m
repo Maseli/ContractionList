@@ -24,7 +24,7 @@
     // 读取资源文件数据
     mNameArray = [[NSArray alloc] initWithContentsOfFile:path];
     // 根据列表个数初始化标记个数
-    flag = (BOOL*)malloc(sizeof(BOOL*)*[mNameArray count]);
+    flag = (BOOL*)malloc([mNameArray count]*sizeof(BOOL));
     memset((void*)flag, NO, sizeof(flag));
 }
 
@@ -71,7 +71,7 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView* sectionView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0f, 30.0f)];
+    UIView* sectionView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, 320.0f, 30.0f)] autorelease];
     
     UIButton* sectionBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     sectionBtn.frame = CGRectMake(0, 0, 320.0f, 30.0f);
@@ -79,7 +79,6 @@
     sectionBtn.tag = section;
     [sectionBtn addTarget:self action:@selector(headerClicked:) forControlEvents:UIControlEventTouchUpInside];
     [sectionView addSubview:sectionBtn];
-    [sectionBtn release];
     
     UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0f, 5.0f, 200.0f, 22.0f)];
     titleLabel.backgroundColor = [UIColor clearColor];
